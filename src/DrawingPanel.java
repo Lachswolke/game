@@ -22,6 +22,8 @@ public class DrawingPanel extends JPanel {
     protected TerrainGeneration terrainGeneration;
 
     public DrawingPanel() {
+        setBackground(Color.BLACK);
+
         Random rn = new Random();
         terrainGeneration = new TerrainGeneration(10, 1000,1000);
         player = new Player(0, 0, 100, 100);
