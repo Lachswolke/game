@@ -1,5 +1,7 @@
 package GameObjects.ImmovableObjects;
+
 import GameObjects.GameObject;
+
 /*
     ImmovableObject Methods:                                       |Return     | Parameter
     ImmovableObject     -> Constructor of CollectibleObject        |           | int,int,int,int,String
@@ -7,9 +9,10 @@ import GameObjects.GameObject;
 */
 public class ImmovableObject extends GameObject {
     public ImmovableObject(int x, int y, int width, int height, String texturePath) {
-        super(x, y, width, height, "/Blöcke/"+texturePath);
+        super(x, y, width, height, "/Blöcke/" + texturePath);
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 }
