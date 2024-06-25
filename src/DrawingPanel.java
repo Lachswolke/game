@@ -4,8 +4,13 @@ import GameObjects.MovableObject.MovableObject;
 import GameObjects.Collectibles.CollectibleObject;
 import GameObjects.MovableObject.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +25,18 @@ public class DrawingPanel extends JPanel {
     protected MovableObject player;
     private boolean collectiblesSpawned = false;
     protected TerrainGeneration terrainGeneration;
+    protected BufferedImage backgroundImage;
 
     public DrawingPanel() {
+        String pathWay = "Reccourses/Background/background.png";
+        Path path = Paths.get(pathWay).toAbsolutePath();
+
+        try {
+            backgroundImage = ImageIO.read(new File(String.valueOf(path)));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         setBackground(Color.BLACK);
 
         Random rn = new Random();
@@ -43,6 +58,9 @@ public class DrawingPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        if (backgroundImage != null){
+            g.drawImage(backgroundImage,0,0,this.getWidth(),this.getHeight(), this);
+        }
         objects.stream().filter(Objects::nonNull).forEach(i -> i.draw(g));
         collectibles.stream().filter(Objects::nonNull).forEach(i -> i.draw(g));
 

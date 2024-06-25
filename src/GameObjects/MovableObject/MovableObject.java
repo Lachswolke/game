@@ -5,6 +5,7 @@ import GameObjects.GameObject;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.Set;
 import java.util.HashSet;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ public class MovableObject extends GameObject implements KeyListener {
     protected double friction = 0.1;
     protected double maxSpeed = 10.0;
     protected double gravity = 0.2; // Gravity force
-
+    protected String direction = "left";
     protected JPanel parentPanel;
 
     public MovableObject(int x, int y, int width, int height , String texturePath) {
@@ -30,6 +31,11 @@ public class MovableObject extends GameObject implements KeyListener {
     }
 
     @Override
+    public void draw(Graphics g) {
+        g.fillRect(x,y,width,height);
+    }
+
+    @Override
     public void update() {
 
         velocityY += gravity;
@@ -39,9 +45,11 @@ public class MovableObject extends GameObject implements KeyListener {
         }
         if (pressedKeys.contains(KeyEvent.VK_A)) {
             velocityX -= acceleration;
+            direction = "left";
         }
         if (pressedKeys.contains(KeyEvent.VK_D)) {
             velocityX += acceleration;
+            direction = "right";
         }
 
 
