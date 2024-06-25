@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,12 +10,9 @@ public class Main {
 
         JButton startGameButton = new JButton();
         startGameButton.setBounds(100,100,300,100);
-        startGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameFrame gameFrame = new GameFrame();
-                gameFrame.setVisible(true);
-            }
+        startGameButton.addActionListener(e -> {
+            GameFrame gameFrame = new GameFrame();
+            gameFrame.setVisible(true);
         });
         startGameButton.setText("Starte das Spiel");
 

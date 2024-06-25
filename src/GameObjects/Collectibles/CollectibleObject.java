@@ -1,9 +1,10 @@
 package GameObjects.Collectibles;
-
-
 import GameObjects.GameObject;
-
-import java.awt.*;
+/*
+    CollectibleObject Methods:                                      |Return     | Parameter
+    CollectibleObject    -> Constructor of CollectibleObject        |           | int,int,int,int,String
+    update               -> can be used to change Coordinates       |           |
+*/
 
 public class CollectibleObject extends GameObject {
 
@@ -13,7 +14,5 @@ public class CollectibleObject extends GameObject {
 
 
     @Override
-    public void update() {
-        // No movement for collectible objects
-    }
+    public void update() {}
 }

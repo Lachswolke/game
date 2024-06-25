@@ -1,7 +1,8 @@
 package GameObjects.Collectibles;
-
-import com.sun.tools.javac.Main;
-
+/*
+    Coin Methods:                                                   |Return     | Parameter
+    Coin    -> Constructor of Coin                                  |           | int,int,int,int
+*/
 public class Coin extends CollectibleObject{
     public Coin(int x, int y, int width, int height) {
 

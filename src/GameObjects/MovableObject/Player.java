@@ -15,21 +15,21 @@ public class Player extends MovableObject{
 
     @Override
     public void draw(Graphics g) {
-        if (image != null) {
+        if (texture != null) {
             if (gravity > 0) {
-                BufferedImage subImage = image.getSubimage(0, 0, width, height);
+                BufferedImage subImage = texture.getSubimage(0, 0, width, height);
                 g.drawImage(mirrorImage(subImage), x, y, width, height, null);
             } else {
                 animationX += width;
-                if (animationX >= image.getWidth()) {
+                if (animationX >= texture.getWidth()) {
                     animationX = 0;
                     animationY += height;
-                    if (animationY >= image.getHeight()) {
+                    if (animationY >= texture.getHeight()) {
                         animationY = 0;
                     }
                 }
 
-                BufferedImage subImage = image.getSubimage(animationX, animationY, width, height);
+                BufferedImage subImage = texture.getSubimage(animationX, animationY, width, height);
                 g.drawImage(mirrorImage(subImage), x, y, width, height, null);
             }
         }

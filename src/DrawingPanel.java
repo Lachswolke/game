@@ -28,7 +28,7 @@ public class DrawingPanel extends JPanel {
     protected BufferedImage backgroundImage;
 
     public DrawingPanel() {
-        String pathWay = "Reccourses/Background/background.png";
+        String pathWay = "Recourses/Background/background.png";
         Path path = Paths.get(pathWay).toAbsolutePath();
 
         try {
@@ -39,13 +39,12 @@ public class DrawingPanel extends JPanel {
 
         setBackground(Color.BLACK);
 
-        Random rn = new Random();
         terrainGeneration = new TerrainGeneration(10, 1000,1000);
         player = new Player(0, 0, 100, 100);
         player.setParentPanel(this);
 
         objects.add(player);
-        terrainGeneration.generateTerrain().stream().forEach(i -> objects.add(i));
+        objects.addAll(terrainGeneration.generateTerrain());
         addKeyListener(player);
 
         setFocusable(true);
