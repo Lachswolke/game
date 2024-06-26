@@ -1,7 +1,8 @@
 import GameObjects.Collectibles.Coin;
 import GameObjects.GameObject;
-import GameObjects.MovableObject.MovableObject;
+import GameObjects.MovableObject.Enemy;
 import GameObjects.Collectibles.CollectibleObject;
+import GameObjects.MovableObject.MovableObject;
 import GameObjects.MovableObject.Player;
 
 import javax.imageio.ImageIO;
@@ -23,6 +24,7 @@ public class DrawingPanel extends JPanel {
     protected List<CollectibleObject> collectibles = new ArrayList<>();
     protected Random random = new Random();
     protected MovableObject player;
+    protected Enemy enemy;
     private boolean collectiblesSpawned = false;
     protected TerrainGeneration terrainGeneration;
     protected BufferedImage backgroundImage;
@@ -43,7 +45,12 @@ public class DrawingPanel extends JPanel {
         player = new Player(0, 0, 100, 100);
         player.setParentPanel(this);
 
+        enemy = new Enemy(900,900,100,100);
+        enemy.setParentPanel(this);
+
+
         objects.add(player);
+        objects.add(enemy);
         objects.addAll(terrainGeneration.generateTerrain());
         addKeyListener(player);
 
@@ -77,6 +84,7 @@ public class DrawingPanel extends JPanel {
             collectibles.removeAll(collected);
             spawnCollectibles(collected.size());
         }
+        enemy.moveToPlayer((Player) player);
         repaint();
     }
 
@@ -85,7 +93,7 @@ public class DrawingPanel extends JPanel {
             int x = random.nextInt(getWidth() - 50); // 20 is the width of the collectible
             int y = random.nextInt(getHeight() - 50); // 20 is the height of the collectible
             CollectibleObject collectible = new Coin(x, y, 50, 50);
-            if (CollisionHandler.checkForCollisionBeforeSpawning(collectible, objects) == false){
+            if (!CollisionHandler.checkForCollisionBeforeSpawning(collectible, objects)){
                 collectibles.add(collectible);
             }else {
                 i--;

@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Set;
 import java.util.HashSet;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class MovableObject extends GameObject implements KeyListener {
 

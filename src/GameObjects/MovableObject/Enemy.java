@@ -1,16 +1,19 @@
 package GameObjects.MovableObject;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-public class Player extends MovableObject{
+public class Enemy extends MovableObject {
     protected int animationX = 0;
     protected int animationY = 0;
 
-    public Player(int x, int y, int width, int height) {
-        super(x, y, width, height, "Player/player.png");
+    public Enemy(int x, int y, int width, int height) {
+        super(x, y, width, height, "Enemy/enemy.png");
+        maxSpeed = 5.0;
+        acceleration = 0.5;
     }
 
     @Override
@@ -35,13 +38,37 @@ public class Player extends MovableObject{
         }
     }
 
-    private Image mirrorImage(BufferedImage image){
-        if (direction.equals("right")){
-            AffineTransform tx = AffineTransform.getScaleInstance(-1,1);
-            tx.translate(-image.getWidth(),0);
+    public void moveToPlayer(Player player) {
+        int playerX = player.x;
+        int playerY = player.y;
+
+
+        if (playerY > y && gravity < 0){
+            gravity *= -1;
+        }else if (playerY < y && gravity > 0){
+            gravity *= -1;
+        }
+
+        if (playerX > x) {
+            velocityX += acceleration;
+        } else if (playerX < x) {
+            velocityX -= acceleration;
+        }
+    }
+
+    private Image mirrorImage(BufferedImage image) {
+        if (direction.equals("right")) {
+            AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+            tx.translate(-image.getWidth(), 0);
             AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-            image = op.filter(image,null);
+            image = op.filter(image, null);
         }
         return image;
     }
+
+    @Override
+    public void keyPressed(KeyEvent e) {}
+
+    @Override
+    public void keyReleased(KeyEvent e) {}
 }
