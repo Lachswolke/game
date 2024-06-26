@@ -28,7 +28,7 @@ public class DrawingPanel extends JPanel {
     protected BufferedImage backgroundImage;
 
     public DrawingPanel() {
-        String pathWay = "Recourses/Background/background.png";
+        String pathWay = "Recourses/Background/background_black.png";
         Path path = Paths.get(pathWay).toAbsolutePath();
 
         try {
@@ -85,7 +85,14 @@ public class DrawingPanel extends JPanel {
             int x = random.nextInt(getWidth() - 50); // 20 is the width of the collectible
             int y = random.nextInt(getHeight() - 50); // 20 is the height of the collectible
             CollectibleObject collectible = new Coin(x, y, 50, 50);
-            collectibles.add(collectible);
+            if (CollisionHandler.checkForCollisionBeforeSpawning(collectible, objects) == false){
+                collectibles.add(collectible);
+            }else {
+                i--;
+            }
+
+
         }
     }
+
 }

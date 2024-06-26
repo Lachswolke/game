@@ -1,4 +1,5 @@
 import GameObjects.GameObject;
+import GameObjects.ImmovableObjects.ImmovableObject;
 import GameObjects.MovableObject.MovableObject;
 import GameObjects.Collectibles.CollectibleObject;
 
@@ -64,5 +65,9 @@ public class CollisionHandler {
             }
         }
         return collected;
+    }
+
+    public static boolean checkForCollisionBeforeSpawning(CollectibleObject collectibleObject, List<GameObject> immovableObjects){
+        return immovableObjects.stream().anyMatch(c -> collectibleObject.getBounds().intersects(c.getBounds()));
     }
 }
