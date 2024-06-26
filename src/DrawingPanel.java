@@ -21,6 +21,7 @@ public class DrawingPanel extends JPanel {
     private boolean collectiblesSpawned = false;
     protected TerrainGeneration terrainGeneration;
 
+
     public DrawingPanel() {
         Random rn = new Random();
         terrainGeneration = new TerrainGeneration(10, 1000,1000);

@@ -34,9 +34,6 @@ public class MovableObject extends GameObject implements KeyListener {
 
         velocityY += gravity;
 
-        if (pressedKeys.contains(KeyEvent.VK_S)) {
-            velocityY += acceleration;
-        }
         if (pressedKeys.contains(KeyEvent.VK_A)) {
             velocityX -= acceleration;
         }

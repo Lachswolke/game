@@ -9,6 +9,7 @@ public class GameFrame extends JFrame {
         setLocation(1000,0);
         setSize(1000,1000);
 
+
         panel = new DrawingPanel();
         add(panel);
 
