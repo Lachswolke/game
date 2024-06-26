@@ -36,6 +36,7 @@ public class Player extends MovableObject{
     }
 
     private Image mirrorImage(BufferedImage image){
+        System.out.println("MOIN");
         if (direction.equals("right")){
             AffineTransform tx = AffineTransform.getScaleInstance(-1,1);
             tx.translate(-image.getWidth(),0);
