@@ -1,7 +1,9 @@
+import GameObjects.Collectibles.Coin;
 import GameObjects.GameObject;
-import GameObjects.ImmovableObjects.ImmovableObject;
+import GameObjects.MovableObject.Enemy;
 import GameObjects.MovableObject.MovableObject;
 import GameObjects.Collectibles.CollectibleObject;
+import GameObjects.MovableObject.Player;
 
 import java.awt.Rectangle;
 import java.util.List;
@@ -61,6 +63,7 @@ public class CollisionHandler {
         List<CollectibleObject> collected = new ArrayList<>();
         for (CollectibleObject collectible : collectibles) {
             if (player.getBounds().intersects(collectible.getBounds())) {
+                Coin.colletedCoins++;
                 collected.add(collectible);
             }
         }
@@ -69,5 +72,13 @@ public class CollisionHandler {
 
     public static boolean checkForCollisionBeforeSpawning(CollectibleObject collectibleObject, List<GameObject> immovableObjects){
         return immovableObjects.stream().anyMatch(c -> collectibleObject.getBounds().intersects(c.getBounds()));
+    }
+
+    public static boolean enemyIntersectsPlayer(Player player, Enemy enemy){
+        int extendedHitbox = 10;
+        Rectangle playerHitbox = new Rectangle(player.x+extendedHitbox,player.y+extendedHitbox,player.width+extendedHitbox,player.height+extendedHitbox);
+        Rectangle enemyHitbox = new Rectangle(enemy.x+extendedHitbox,enemy.y+extendedHitbox,enemy.width+extendedHitbox,enemy.height+extendedHitbox);
+
+        return playerHitbox.getBounds().intersects(enemyHitbox.getBounds());
     }
 }

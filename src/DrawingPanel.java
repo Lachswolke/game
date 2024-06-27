@@ -19,15 +19,16 @@ import java.util.Objects;
 import java.util.Random;
 
 public class DrawingPanel extends JPanel {
-
     protected List<GameObject> objects = new ArrayList<>();
     protected List<CollectibleObject> collectibles = new ArrayList<>();
     protected Random random = new Random();
-    protected MovableObject player;
+    protected Player player;
     protected Enemy enemy;
     private boolean collectiblesSpawned = false;
     protected TerrainGeneration terrainGeneration;
     protected BufferedImage backgroundImage;
+    private Timer timer;
+    private int ctr = 0;
 
     public DrawingPanel() {
         String pathWay = "Recourses/Background/background_black.png";
@@ -57,7 +58,7 @@ public class DrawingPanel extends JPanel {
         setFocusable(true);
 
         // Start the game loop
-        Timer timer = new Timer(16, e -> update());
+        timer = new Timer(16, e -> update());
         timer.start();
     }
 
@@ -74,9 +75,18 @@ public class DrawingPanel extends JPanel {
             spawnCollectibles(5);
             collectiblesSpawned = true;
         }
+
+        Font myFont = new Font("Serif", Font.BOLD, 50);
+        g.setFont(myFont);
+        g.setColor(Color.WHITE);
+        g.drawString(""+Coin.colletedCoins, 30,30);
     }
 
     public void update() {
+        if (CollisionHandler.enemyIntersectsPlayer(player,enemy)){
+            stopGame();
+            return;
+        }
         objects.stream().filter(Objects::nonNull).forEach(GameObject::update);
         CollisionHandler.checkCollisions(objects);
         List<CollectibleObject> collected = CollisionHandler.checkCollectibleCollisions(player, collectibles);
@@ -101,6 +111,14 @@ public class DrawingPanel extends JPanel {
 
 
         }
+    }
+
+    private void stopGame(){
+        Main.gameFrame.setVisible(false);
+        timer.stop();
+        GameFrame.collectedCoin = Coin.colletedCoins;
+        Main.gameFrame.dispose();
+
     }
 
 }
