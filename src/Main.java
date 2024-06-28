@@ -17,16 +17,22 @@ public class Main {
         JButton startGameButton = new JButton("Starte das Spiel");
         startGameButton.setBounds(100, 100, 300, 100);
         startGameButton.addActionListener(e -> {
-            gameFrame = new GameFrame();
-            gameFrame.setVisible(true);
-            gameFrame.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    System.out.println("Coins collected: " + GameFrame.collectedCoin);
-                    overAllCollectedCoins += GameFrame.collectedCoin;
-                    System.out.println("Overall: " + overAllCollectedCoins);
-                }
-            });
+            if (gameFrame != null) {
+                gameFrame.reset();
+                gameFrame.start();
+                gameFrame.setVisible(true);
+            } else {
+                gameFrame = new GameFrame();
+                gameFrame.setVisible(true);
+                gameFrame.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        System.out.println("Coins collected: " + GameFrame.collectedCoin);
+                        overAllCollectedCoins += GameFrame.collectedCoin;
+                        System.out.println("Overall: " + overAllCollectedCoins);
+                    }
+                });
+            }
         });
 
         menu.add(startGameButton);
