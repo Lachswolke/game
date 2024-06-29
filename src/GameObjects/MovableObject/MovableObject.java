@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.HashSet;
 import javax.swing.*;
 
-public class MovableObject extends GameObject implements KeyListener {
+public class MovableObject extends GameObject {
 
     protected Set<Integer> pressedKeys;
     public double velocityX, velocityY;
@@ -36,27 +36,6 @@ public class MovableObject extends GameObject implements KeyListener {
     public void update() {
 
         velocityY += gravity;
-
-        if (pressedKeys.contains(KeyEvent.VK_S)) {
-            velocityY += acceleration;
-        }
-        if (pressedKeys.contains(KeyEvent.VK_A)) {
-            velocityX -= acceleration;
-            direction = "left";
-        }
-        if (pressedKeys.contains(KeyEvent.VK_D)) {
-            velocityX += acceleration;
-            direction = "right";
-        }
-
-
-        if (!pressedKeys.contains(KeyEvent.VK_A) && !pressedKeys.contains(KeyEvent.VK_D)) {
-            if (velocityX > 0) {
-                velocityX = Math.max(0, velocityX - friction);
-            } else if (velocityX < 0) {
-                velocityX = Math.min(0, velocityX + friction);
-            }
-        }
 
         velocityX = Math.max(-maxSpeed, Math.min(maxSpeed, velocityX));
         velocityY = Math.max(-maxSpeed, Math.min(maxSpeed, velocityY));
@@ -89,20 +68,4 @@ public class MovableObject extends GameObject implements KeyListener {
         y = newY;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        pressedKeys.add(e.getKeyCode());
-        if (pressedKeys.contains(KeyEvent.VK_SPACE)){
-            gravity *= -1;
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        pressedKeys.remove(e.getKeyCode());
-    }
 }

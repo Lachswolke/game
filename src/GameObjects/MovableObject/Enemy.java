@@ -1,7 +1,6 @@
 package GameObjects.MovableObject;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -66,9 +65,5 @@ public class Enemy extends MovableObject {
         return image;
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {}
 
-    @Override
-    public void keyReleased(KeyEvent e) {}
 }
